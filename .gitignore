@@ -16,3 +16,6 @@ media/*
 static/*
 pip-log.txt
 .DS_Store
+.bumpversion.cfg
+.python-version
+*_syspath
