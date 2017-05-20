@@ -42,7 +42,7 @@ class Message(models.Model):
     contenu = models.TextField()
     date = models.DateTimeField(default=datetime.now(), blank=True)
     expediteur = models.ForeignKey(UserProfile) #L'élève qui a rédigé le message
- 
+
     lu = models.ManyToManyField(UserProfile,related_name='message_lu', blank=True) #Les élèves qui ont lu le message
     important = models.ManyToManyField(UserProfile,related_name='message_important', blank=True) #Les élèves qui ont classé le message comme important
 
@@ -51,24 +51,24 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-date']
-    
+
     def get_absolute_url(self):
         return self.association.get_absolute_url() + 'messages/'
-  
+
     def __str__(self):
         return self.objet
 
     @property
     def est_recent(self):
         return (self.date.date() == date.today())
-    
+
     def envoyer_message_notification(self):
         message = self.association.nom + ' a publie un nouveau message'
         notification = Notification(content_object=self, description=message)
         notification.save()
         notification.envoyer_multiple(self.association.suivi_par.all())
-        
-    
+
+
     def envoyer_commentaire_notification(self, comment_pk, username):
         eleve = UserProfile.objects.get(user__username = username)
         message = eleve.first_name + ' ' + eleve.last_name + ' a commente un message de ' + self.association.nom
@@ -76,13 +76,13 @@ class Message(models.Model):
         notification = Notification(content_object=commentaire, description=message)
         notification.save()
         notification.envoyer_multiple(self.association.suivi_par.all())
-                
+
     def save(self, *args, **kwargs):
-        creation = self.pk is None #Creation de l'objet         
+        creation = self.pk is None #Creation de l'objet
         super(Message, self).save(*args, **kwargs)
-        if creation:            
+        if creation:
             self.envoyer_message_notification()
-            
+
     def html_to_text(self):
         s = HTMLTextExtractor()
         s.feed(self.contenu)
@@ -92,12 +92,12 @@ class Message(models.Model):
     def accessibles_par(eleve):
         return Message.objects.filter(date__gte = eleve.date_entree_aux_mines())
 
-    
+
 class MessageForm(ModelForm):
-    contenu = forms.CharField(widget=TinyMCE(attrs={'cols': 120, 'rows': 30}))
+    contenu = forms.CharField(widget=TinyMCE(attrs={'cols': 520, 'rows': 10}))
 
     class Meta:
         model = Message
         fields = ('objet', 'contenu')
-        
-        
+
+

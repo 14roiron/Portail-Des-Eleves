@@ -4,7 +4,7 @@ import os
 basepath = os.path.abspath(os.path.dirname(__file__)) + '/'
 
 DEBUG = False
-#TEMPLATE_DEBUG = DEBUG 
+#TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['www.mines-paris.eu', 'mines-paris.eu']
 
 ADMINS = (
@@ -121,7 +121,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -153,10 +153,10 @@ INSTALLED_APPS = (
     'petitscours',
     'timetable',
     'sondages',
-    'evenement', 
+    'evenement',
     'minesmarket',
     'minestryofsound',
-    'vendome', 
+    'vendome',
     'bda',
     'htc',
     'psl',
@@ -212,27 +212,10 @@ LOGGING = {
 
 
 EMAIL_HOST = "cobra.ensmp.fr"
-EMAIL_PORT = 587 
+EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = "maxime.brunet@mines-paristech.fr"
 EMAIL_HOST_USER = "maxime.brunet"
 EMAIL_HOST_PASSWORD = "Ever:2014"
 
 
 AUTH_PROFILE_MODULE = 'trombi.UserProfile'
-
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = False
-TINYMCE_DEFAULT_CONFIG={
-  'theme': "advanced", 
-  'remove_linebreaks': False, 
-  'convert_urls': False, 
-  'width':'100%',
-  'height':'300px',
-  'paste_auto_cleanup_on_paste' : True,
-  'theme_advanced_buttons1' : "formatselect,separator,bold,italic,hr,separator,link,unlink,separator,bullist,numlist,separator,undo,redo,",
-  'theme_advanced_buttons2' : "",
-  'theme_advanced_buttons3' : ""  ,
-  'theme_advanced_blockformats' : "p,h1,h2,h3,blockquote",
-  'theme_advanced_toolbar_location' : "top",
-  'content_css' : "/media/css/tiny_editor.css" 
-}
