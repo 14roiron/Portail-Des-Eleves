@@ -10,7 +10,7 @@ public/.htaccess
 public/django.fcgi
 
 public/django.fcgi.old
-
+*.bak
 public/media/*
 media/*
 static/*
